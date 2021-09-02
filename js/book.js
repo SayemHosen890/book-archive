@@ -1,4 +1,5 @@
 document.getElementById('error-message').style.display = 'none';
+document.getElementById('error-found').style.display = 'none';
 //load data from api
 const searchBook = () => {
     const searchInput = document.getElementById('search-input');
@@ -6,12 +7,14 @@ const searchBook = () => {
     //clear data
     searchInput.value = '';
     //error handling
-    if (searchField === '') {
+    if (searchField === '' || searchField === 'undefined') {
         // console.log('try again');
         document.getElementById('error-message').style.display = 'block';
+        document.getElementById('error-found').style.display = 'none';
     }
     else {
         document.getElementById('error-message').style.display = 'none';
+        document.getElementById('error-found').style.display = 'block';
         const url = `https://openlibrary.org/search.json?q=${searchField}`;
         // console.log(url);
         fetch(url)
