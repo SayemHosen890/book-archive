@@ -7,14 +7,19 @@ const searchBook = () => {
     //clear data
     searchInput.value = '';
     //error handling
-    if (searchField === '' || searchField === 'undefined') {
-        // console.log('try again');
+    // if (searchField === 'undefined') {
+    //     document.getElementById('error-found').style.display = 'block';
+    // }
+    if (searchField === '' && searchField !== undefined) {
         document.getElementById('error-message').style.display = 'block';
         document.getElementById('error-found').style.display = 'none';
     }
+    // else if (searchField !== 'undefined') {
+    //     document.getElementById('error-found').style.display = 'none';
+    // }
     else {
         document.getElementById('error-message').style.display = 'none';
-        document.getElementById('error-found').style.display = 'block';
+        document.getElementById('error-found').style.display = 'none';
         const url = `https://openlibrary.org/search.json?q=${searchField}`;
         // console.log(url);
         fetch(url)
@@ -28,8 +33,10 @@ const displayBook = books => {
     console.log(books[0]);
     const displayResult = document.getElementById('display-result');
     displayResult.textContent = '';
+    document.getElementById('error-found').style.display = 'block';
     books.forEach(book => {
         console.log(book);
+        document.getElementById('error-found').style.display = 'none';
         const div = document.createElement('div');
         div.classList.add('col');
         div.innerHTML = `
